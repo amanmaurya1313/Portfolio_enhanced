@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aman Portfolio</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+:root{
+  --bg:#0f172a;
+  --text:#ffffff;
+  --card:#1e293b;
+  --green:#22c55e;
+  --section:#111827;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:0.4s;
+}
+
+/* DARK/LIGHT MODE */
+body.light-mode{
+  --bg:#f3f4f6;
+  --text:#111827;
+  --card:#ffffff;
+  --section:#e5e7eb;
+}
+
+/* PARTICLES */
+.particles{
+  position:fixed;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:-1;
+}
+
+.block{
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:var(--green);
+  opacity:0.2;
+  animation:float linear infinite;
+}
+
+@keyframes float{
+  from{
+    transform:translateY(100vh) rotate(0deg);
+  }
+  to{
+    transform:translateY(-10vh) rotate(360deg);
+  }
+}
+
+/* NAVBAR */
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  padding:18px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:0.4s;
+  z-index:1000;
+}
+
+header.scrolled{
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+
+.logo{
+  font-family:'Press Start 2P',cursive;
+  font-size:12px;
+  color:var(--green);
+}
+
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  margin-left:20px;
+  transition:0.3s;
+  position:relative;
+}
+
+nav a:hover,
+nav a.active{
+  color:var(--green);
+}
+
+nav a.active::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:2px;
+  left:0;
+  bottom:-5px;
+  background:var(--green);
+}
+
+/* TOGGLE BUTTON */
+.toggle-btn{
+  margin-left:20px;
+  background:var(--green);
+  border:none;
+  padding:8px 14px;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+
+  background:
+  linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+  url('https://images.unsplash.com/photo-1594845222818-9097c52dabb5?w=1600&auto=format&fit=crop&q=80')
+  center/cover no-repeat;
+}
+.hero h1{
+  font-size:48px;
+  color:white;
+}
+
+.hero span{
+  color:var(--green);
+}
+
+.hero p{
+  margin:20px 0;
+  color:white;
+}
+
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  background:var(--green);
+  color:black;
+  padding:12px 25px;
+  border-radius:6px;
+  transition:0.3s;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.btn:hover{
+  transform:scale(1.08);
+  background:#16a34a;
+}
+/* SECTION */
+section{
+  padding:100px 8%;
+}
+
+.about,
+.contact{
+  text-align:center;
+}
+
+.about p{
+  max-width:700px;
+  margin:20px auto;
+  opacity:0.85;
+}
+
+/* PROJECTS */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:var(--card);
+  padding:30px;
+  border-radius:12px;
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  background:#14532d;
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+/* FORM */
+form{
+  max-width:500px;
+  margin:30px auto;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:6px;
+  outline:none;
+  font-size:15px;
+}
+
+textarea{
+  resize:none;
+  height:120px;
+}
+
+.error{
+  color:#ff4d4d;
+  font-size:14px;
+  text-align:left;
+  margin-top:-10px;
+  margin-bottom:10px;
+}
+
+/* FOOTER */
+footer{
+  background:black;
+  text-align:center;
+  padding:20px;
+}
+
+/* ANIMATIONS */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  nav a{
+    margin-left:10px;
+    font-size:14px;
+  }
+
+  header{
+    padding:15px 5%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PARTICLE BACKGROUND -->
+<div class="particles"></div>
+
+<!-- NAVBAR -->
+<header id="navbar">
+  <div class="logo">MAINCRAFT</div>
+
+  <nav>
+    <a href="#home" class="nav-link active">Home</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#contact" class="nav-link">Contact</a>
+
+    <button class="toggle-btn" id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <h1>Hi, I'm <span>Aman</span></h1>
+  <p>Building Creative Digital Worlds 🚀</p>
+  <a href="#projects" class="btn">View Work</a>
+</section>
+
+<!-- ABOUT -->
+<section class="about fade" id="about">
+  <h2>About Me</h2>
+  <p>
+    I am a passionate web developer/designer who loves creating modern,
+    responsive and visually stunning websites. Inspired by Minecraft
+    creativity, I blend design with functionality to build unique experiences.
+  </p>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2 style="text-align:center;margin-bottom:40px;">Projects</h2>
+
+  <div class="projects">
+
+    <div class="card fade">
+      <h3>Landing Page</h3>
+      <p>Modern responsive landing page using HTML, CSS & JavaScript.</p>
+    </div>
+
+    <div class="card fade">
+      <h3>Portfolio Website</h3>
+      <p>Interactive portfolio with animations and dark mode.</p>
+    </div>
+
+    <div class="card fade">
+      <h3>UI Design</h3>
+      <p>Creative UI concepts with modern user experience.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact fade" id="contact">
+  <h2>Contact Me</h2>
+
+  <form id="contactForm">
+
+    <input type="text" id="name" placeholder="Your Name">
+    <div class="error" id="nameError"></div>
+
+    <input type="email" id="email" placeholder="Your Email">
+    <div class="error" id="emailError"></div>
+
+    <textarea id="message" placeholder="Your Message"></textarea>
+    <div class="error" id="messageError"></div>
+
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+
+  <p>Email: aman.maurya1313@gmail.com</p>
+
+  <a href="https://www.linkedin.com/in/aman-maurya-504b15296" target="_blank">LinkedIn</a> |
+  <a href="https://github.com/amanmaurya1313" target="_blank">GitHub</a>
+</section>
+
+<footer>
+  <p>© 2026 Maincraft Technologies | All Rights Reserved</p>
+</footer>
+
+<script>
+
+/* PARTICLES */
+const container = document.querySelector('.particles');
+
+for(let i=0;i<40;i++){
+  const block = document.createElement('div');
+  block.classList.add('block');
+
+  block.style.left = Math.random()*100 + "vw";
+  block.style.animationDuration = (5 + Math.random()*10) + "s";
+  block.style.opacity = Math.random();
+
+  container.appendChild(block);
+}
+
+/* SCROLL NAVBAR */
+const navbar = document.getElementById('navbar');
+
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY > 50);
+});
+
+/* ACTIVE NAV LINKS */
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-link");
+
+window.addEventListener("scroll",()=>{
+
+  let current = "";
+
+  sections.forEach(section=>{
+    const sectionTop = section.offsetTop;
+
+    if(scrollY >= sectionTop - 200){
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link=>{
+    link.classList.remove("active");
+
+    if(link.getAttribute("href").includes(current)){
+      link.classList.add("active");
+    }
+  });
+});
+
+/* SCROLL ANIMATION */
+const faders = document.querySelectorAll('.fade');
+
+window.addEventListener('scroll', () => {
+  faders.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+
+    if(top < window.innerHeight - 100){
+      el.classList.add('show');
+    }
+  });
+});
+
+/* FORM VALIDATION */
+const form = document.getElementById("contactForm");
+
+form.addEventListener("submit",(e)=>{
+
+  e.preventDefault();
+
+  let valid = true;
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  document.getElementById("nameError").innerText = "";
+  document.getElementById("emailError").innerText = "";
+  document.getElementById("messageError").innerText = "";
+
+  if(name === ""){
+    document.getElementById("nameError").innerText = "Name is required";
+    valid = false;
+  }
+
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+  if(email === ""){
+    document.getElementById("emailError").innerText = "Email is required";
+    valid = false;
+  }
+  else if(!email.match(emailPattern)){
+    document.getElementById("emailError").innerText = "Enter a valid email";
+    valid = false;
+  }
+
+  if(message === ""){
+    document.getElementById("messageError").innerText = "Message cannot be empty";
+    valid = false;
+  }
+
+  if(valid){
+    alert("Message sent successfully!");
+    form.reset();
+  }
+});
+
+/* DARK MODE TOGGLE */
+const toggleBtn = document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme") === "light"){
+  document.body.classList.add("light-mode");
+  toggleBtn.innerHTML = "☀️";
+}
+
+toggleBtn.addEventListener("click",()=>{
+
+  document.body.classList.toggle("light-mode");
+
+  if(document.body.classList.contains("light-mode")){
+    localStorage.setItem("theme","light");
+    toggleBtn.innerHTML = "☀️";
+  }
+  else{
+    localStorage.setItem("theme","dark");
+    toggleBtn.innerHTML = "🌙";
+  }
+});
+
+</script>
+
+</body>
+</html>
